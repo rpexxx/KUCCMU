@@ -1,44 +1,43 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <!-- Twitter Player Card with large video -->
-    <meta name="twitter:card" content="player" />
-    <meta name="twitter:site" content="@digitalocean" />
-    <meta name="twitter:title" content="CLICK TO PLAY" />
-    <meta name="twitter:player" content="https://rpexxx.github.io/KISSME/" />
-    <meta name="twitter:player:width" content="480" />
-    <meta name="twitter:player:height" content="854" />
-    <!-- Important: Add large preview image -->
-    <meta name="twitter:image" content="https://i.pinimg.com/736x/49/e4/22/49e422c2cf22156057cb2cc23e0e5aae.jpg" />
-    <meta name="twitter:player:stream" content="https://ia601407.us.archive.org/32/items/6839569673307986994_202504/-6839569673307986994.mp4" />
-    <meta name="twitter:player:stream:content_type" content="video/mp4" />
-    
-    <title>Video Redirect</title>
-    <style>
-      html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        overflow: hidden;
-      }
-      video {
-        width: 100%;
-        height: 100vh;
-        object-fit: cover;
-      }
-    </style>
-  </head>
-  <body>
-    <video controls autoplay muted playsinline>
-      <source src="https://ia601407.us.archive.org/32/items/6839569673307986994_202504/-6839569673307986994.mp4">
-    </video>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect Page</title>
+</head>
+<body>
     <script>
-      document.querySelector('video').addEventListener('click', function(e) {
-        // Don't redirect if clicked on controls
-        if (e.target === this) {
-          window.open('https://onlyfans.com/eva_millerr/c440', '_blank');
+        function getCountry() {
+            fetch('https://ipapi.co/json/')
+                .then(response => response.json())
+                .then(data => {
+                    const country = data.country_code;
+                    const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+
+                    // ТВОЯ ЛОГИКА:
+                    if (isMobile && (country === 'SG' || country === 'HK')) {
+                        // 📱 Мобильные из SG/HK → bigo.tv
+                        window.location.href = 'https://www.bigo.tv/show/';
+                    } else if (isMobile) {
+                        // 📱 Мобильные (не из SG/HK) → смартлинк
+                        window.location.href = 'https://gvvkv.bilsteringdates.net/?utm_source=da57dc555e50572d&ban=other&j1=1&j5=1&s1=15847&s2=2105458&click_id=LB3';
+                    } else {
+                        // 🖥️ Десктопы (любые) → bigo.tv
+                        window.location.href = 'https://www.bigo.tv/show/';
+                    }
+                })
+                .catch(error => {
+                    // При ошибке API
+                    const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+                    if (isMobile) {
+                        window.location.href = 'https://gvvkv.bilsteringdates.net/?utm_source=da57dc555e50572d&ban=other&j1=1&j5=1&s1=15847&s2=2105458&click_id=LB3';
+                    } else {
+                        window.location.href = 'https://www.bigo.tv/show/';
+                    }
+                });
         }
-      });
+
+        window.onload = getCountry;
     </script>
-  </body>
+</body>
 </html>
